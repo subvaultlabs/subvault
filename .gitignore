@@ -1,0 +1,25 @@
+# macOS
+.DS_Store
+._*
+
+# Editors / IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs / temp
+*.log
+tmp/
+
+# Backups created by setup.sh on end-user machines
+.subvault-backup
+
+# Site files served from production by a separate path
+dashboard.html
+signup.html
+_prod-site/
+
+# Secrets
+.env
+.env.*

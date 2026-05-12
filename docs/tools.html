@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tools — SubVault Docs</title>
+<meta name="description" content="The two MCP tools your AI gets when you connect SubVault.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/docs/docs.css">
+</head>
+<body>
+
+<nav class="top">
+  <a href="/" class="logo"><img src="/logo-120.png" alt="SubVault">SubVault <span class="crumb">/ docs / tools</span></a>
+  <div class="nav-links">
+    <a href="/security">Security</a>
+    <a href="/privacy/">Privacy</a>
+    <a href="https://github.com/gavinb-code/subvault">GitHub</a>
+  </div>
+</nav>
+
+<div class="layout">
+<aside>
+  <h3>Docs</h3>
+  <ul>
+    <li><a href="/docs">Overview</a></li>
+    <li><a href="/docs/setup">Setup</a></li>
+    <li><a href="/docs/tools" class="current">Tools</a></li>
+    <li><a href="/docs/troubleshooting">Troubleshooting</a></li>
+  </ul>
+</aside>
+
+<main>
+<h1>Tools</h1>
+<p class="lede">When you connect SubVault, your AI gets two tools: <code>vault</code> for saving knowledge, and <code>remember</code> for recalling it. You don't call them directly &mdash; your AI does, based on what you ask.</p>
+
+<h2>vault</h2>
+
+<div class="tool-row">
+  <div class="tool-name">vault</div>
+  <div class="tool-desc">
+    <strong>Save knowledge from a conversation.</strong> Your AI extracts the structured items worth keeping &mdash; facts, decisions, action items, people &mdash; and saves them to your vault. The raw chat isn't stored; just the load-bearing claims.
+    <em class="example">Try: "Vault what we just decided about the schema migration."</em>
+    <em class="example">Try: "Remember that we use Postgres for our production database."</em>
+  </div>
+</div>
+
+<h2>remember</h2>
+
+<div class="tool-row">
+  <div class="tool-name">remember</div>
+  <div class="tool-desc">
+    <strong>Pull relevant context.</strong> Your AI calls this when you ask about your past work, your projects, your preferences, or anything else that lives in your vault. It returns a curated bundle scored for the current conversation &mdash; not a full dump.
+    <em class="example">Try: "What was I working on last Tuesday?"</em>
+    <em class="example">Try: "What's the status of Project Hyperion?"</em>
+    <em class="example">Try: "What do you know about my tech stack?"</em>
+  </div>
+</div>
+
+<h2>That's it</h2>
+
+<p>Two tools, two verbs. Your AI decides which to call based on what you ask. You don't pick.</p>
+
+<p>Vault stats (count of facts, decisions, action items) come back through <code>remember</code> &mdash; just ask, e.g. <em>"how big is my vault?"</em></p>
+
+<h2>How it flows</h2>
+
+<p>Most chats look like this:</p>
+
+<ol class="body">
+  <li>You ask a question that needs context (<em>"what did we decide about the API rate limits?"</em>).</li>
+  <li>Your AI calls <code>remember</code> with a situation string describing what you're working on.</li>
+  <li>It gets back facts, decisions, and action items relevant to that situation.</li>
+  <li>It uses that context to answer.</li>
+</ol>
+
+<p>Saving works the same way: you say <em>"vault this"</em> or <em>"remember that..."</em> and your AI calls <code>vault</code> with the right content.</p>
+
+<p>To keep a topic out of recall or have an old fact dropped, email <a href="mailto:info@subvault.ai">info@subvault.ai</a>.</p>
+
+</main>
+</div>
+
+<footer>
+  <a href="/">subvault.ai</a> &middot;
+  <a href="/dashboard">Dashboard</a> &middot;
+  <a href="/security">Security</a> &middot;
+  <a href="/privacy/">Privacy</a> &middot;
+  <a href="/terms/">Terms</a>
+</footer>
+
+
+</body>
+</html>

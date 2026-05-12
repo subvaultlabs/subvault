@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Setup — SubVault Docs</title>
+<meta name="description" content="Connect SubVault to Claude Desktop, Cursor, VS Code, or ChatGPT.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/docs/docs.css">
+</head>
+<body>
+
+<nav class="top">
+  <a href="/" class="logo"><img src="/logo-120.png" alt="SubVault">SubVault <span class="crumb">/ docs / setup</span></a>
+  <div class="nav-links">
+    <a href="/security">Security</a>
+    <a href="/privacy/">Privacy</a>
+    <a href="https://github.com/gavinb-code/subvault">GitHub</a>
+  </div>
+</nav>
+
+<div class="layout">
+<aside>
+  <h3>Docs</h3>
+  <ul>
+    <li><a href="/docs">Overview</a></li>
+    <li><a href="/docs/setup" class="current">Setup</a></li>
+    <li><a href="/docs/tools">Tools</a></li>
+    <li><a href="/docs/troubleshooting">Troubleshooting</a></li>
+  </ul>
+</aside>
+
+<main>
+<h1>Setup</h1>
+<p class="lede">Connect SubVault to your AI tool. Pick whichever install path fits.</p>
+
+<h2>Before you start</h2>
+<ol class="body">
+  <li><a href="/signup">Sign up</a> for SubVault if you haven't already.</li>
+  <li>Copy your API key from the signup page. It looks like <code>sv_live_...</code>.</li>
+</ol>
+
+<div class="warn">
+  <strong>The API key is shown once at signup.</strong> Save it somewhere safe. If you lose it, you can regenerate a new one from your <a href="/dashboard">dashboard</a> &mdash; but the old one stops working immediately, so anywhere you've installed it will need to be reconfigured.
+</div>
+
+<h2>Choose your install path</h2>
+
+<div class="tabs" role="tablist">
+  <button class="tab active" data-tab="script">One-line script</button>
+  <button class="tab" data-tab="claude">Claude Desktop (OAuth)</button>
+  <button class="tab" data-tab="chatgpt">ChatGPT</button>
+  <button class="tab" data-tab="manual">Manual JSON</button>
+</div>
+
+<div class="tab-panel active" id="tab-script">
+<h3>One-line install (Cursor, VS Code, Claude Desktop)</h3>
+<p>This script auto-configures every supported AI tool it finds on your machine. Safe to re-run.</p>
+
+<pre><code>curl -fsSL https://subvault.ai/setup.sh | bash -s YOUR_API_KEY</code></pre>
+
+<p>Replace <code>YOUR_API_KEY</code> with the key from your signup page (it starts with <code>sv_live_</code>). The script:</p>
+<ul class="body">
+  <li>Detects Claude Desktop, Cursor, and VS Code on your machine.</li>
+  <li>Writes the SubVault MCP config to each tool's config file.</li>
+  <li>Merges with your existing config &mdash; nothing is overwritten or clobbered.</li>
+</ul>
+
+<p>After it finishes, <strong>restart your AI tool</strong> for the new config to take effect. Then try: <em>"Remember that my tech stack is Python and Postgres."</em></p>
+
+<div class="note">
+  <strong>VS Code note:</strong> The script doesn't write VS Code config automatically &mdash; instead it prints a JSON snippet for you to paste into your project's <code>.vscode/mcp.json</code>. This is because VS Code MCP is per-project, not global.
+</div>
+</div>
+
+<div class="tab-panel" id="tab-claude">
+<h3>Claude Desktop &mdash; OAuth via Connectors UI</h3>
+<p>If you're on a recent Claude Desktop, the OAuth path is the cleanest install. No file editing, no API key copy-paste.</p>
+
+<ol class="body">
+  <li>Open Claude Desktop.</li>
+  <li>Settings &rarr; Connectors &rarr; <strong>Add custom connector</strong>.</li>
+  <li>Paste this URL:
+    <pre><code>https://mcp.subvault.ai/mcp</code></pre>
+  </li>
+  <li>Claude Desktop opens a browser to subvault.ai. Sign in with the email and password you used at signup.</li>
+  <li>Approve the connection. Claude Desktop is now connected.</li>
+</ol>
+
+<p>Try a quick test: <em>"What do you know about me?"</em> &mdash; if SubVault is empty, your AI will say so. If it has content, it'll surface relevant items.</p>
+</div>
+
+<div class="tab-panel" id="tab-chatgpt">
+<h3>ChatGPT &mdash; custom connector</h3>
+<p>SubVault works as a custom connector in ChatGPT (Pro and higher).</p>
+<ol class="body">
+  <li>In ChatGPT, click your profile &rarr; <strong>Settings</strong> &rarr; <strong>Connectors</strong>.</li>
+  <li>Click <strong>Add custom connector</strong> and paste:
+    <pre><code>https://mcp.subvault.ai/mcp</code></pre>
+  </li>
+  <li>ChatGPT will walk you through the OAuth sign-in. Use the same email and password as your subvault.ai account.</li>
+</ol>
+</div>
+
+<div class="tab-panel" id="tab-manual">
+<h3>Manual JSON config</h3>
+<p>If you'd rather edit config files yourself, or you're using a tool the script doesn't cover.</p>
+
+<h3>The config snippet</h3>
+<p>Paste this into your tool's MCP config. Replace <code>YOUR_API_KEY</code> with your real key.</p>
+
+<pre><code>{
+  "mcpServers": {
+    "subvault": {
+      "type": "http",
+      "url": "https://mcp.subvault.ai/mcp",
+      "headers": {
+        "Authorization": "Bearer YOUR_API_KEY"
+      }
+    }
+  }
+}</code></pre>
+
+<h3>Config file locations</h3>
+
+<table>
+<thead><tr><th>Tool</th><th>File</th></tr></thead>
+<tbody>
+<tr><td>Cursor</td><td><code>~/.cursor/mcp.json</code></td></tr>
+<tr><td>Claude Desktop (macOS)</td><td><code>~/Library/Application Support/Claude/claude_desktop_config.json</code></td></tr>
+<tr><td>Claude Desktop (Linux)</td><td><code>~/.config/Claude/claude_desktop_config.json</code></td></tr>
+<tr><td>VS Code (per project)</td><td><code>.vscode/mcp.json</code> &mdash; uses key <code>servers</code> instead of <code>mcpServers</code></td></tr>
+</tbody>
+</table>
+
+<p>If the file already has other MCP servers, add SubVault as another entry under <code>mcpServers</code> rather than replacing the whole file.</p>
+
+<p>For VS Code specifically the wrapper key is <code>servers</code>, not <code>mcpServers</code>:</p>
+
+<pre><code>{
+  "servers": {
+    "subvault": {
+      "type": "http",
+      "url": "https://mcp.subvault.ai/mcp",
+      "headers": {
+        "Authorization": "Bearer YOUR_API_KEY"
+      }
+    }
+  }
+}</code></pre>
+
+<p>After editing, fully quit and relaunch your AI tool.</p>
+</div>
+
+<h2>Confirm it's working</h2>
+<p>In a new chat, try one of these:</p>
+<ul class="body">
+  <li><em>"Remember that my favorite editor is Cursor."</em> &mdash; your AI should call SubVault's <code>vault</code> tool.</li>
+  <li><em>"What do you know about my editor preferences?"</em> &mdash; in a fresh chat, your AI should call <code>remember</code> and tell you about Cursor.</li>
+</ul>
+
+<p>If neither works, see <a href="/docs/troubleshooting">Troubleshooting</a>.</p>
+
+</main>
+</div>
+
+<footer>
+  <a href="/">subvault.ai</a> &middot;
+  <a href="/dashboard">Dashboard</a> &middot;
+  <a href="/security">Security</a> &middot;
+  <a href="/privacy/">Privacy</a> &middot;
+  <a href="/terms/">Terms</a>
+</footer>
+
+<script>
+(function () {
+  function show(name, btn) {
+    document.querySelectorAll(".tab").forEach(function (t) { t.classList.remove("active"); });
+    document.querySelectorAll(".tab-panel").forEach(function (p) { p.classList.remove("active"); });
+    btn.classList.add("active");
+    var panel = document.getElementById("tab-" + name);
+    if (panel) panel.classList.add("active");
+  }
+  document.addEventListener("click", function (e) {
+    var btn = e.target.closest(".tab[data-tab]");
+    if (btn) show(btn.getAttribute("data-tab"), btn);
+  });
+})();
+</script>
+</body>
+</html>

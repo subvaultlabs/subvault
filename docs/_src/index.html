@@ -1,0 +1,41 @@
+<!-- description: SubVault documentation. Setup, tool reference, troubleshooting. -->
+<h1>SubVault docs</h1>
+<p class="lede">SubVault gives every AI tool you use one shared, permanent memory. These docs cover setup, what your AI can do with SubVault, and what to do when something doesn't work.</p>
+
+<h2>What SubVault is</h2>
+<p>SubVault is a hosted Model Context Protocol (MCP) server. You sign up, get an API key, and connect that key to Claude Desktop, Cursor, VS Code, ChatGPT, or any other tool that speaks MCP. Once connected, your AI can save knowledge with <code>vault</code> and recall it with <code>remember</code> &mdash; the same vault feeds every connected tool.</p>
+
+<h2>How it's different</h2>
+
+<h3>vs. Claude or ChatGPT memory</h3>
+<p>Those memories are single-tool. What Claude remembers about you in claude.ai doesn't help you in Cursor or ChatGPT. ChatGPT's memory works inside ChatGPT. SubVault is one memory shared across every tool you use.</p>
+
+<h3>vs. a long system prompt</h3>
+<p>A system prompt is fixed text you paste into every chat. SubVault is a search engine over your own history &mdash; it pulls the few hundred tokens relevant to the question you just asked, not the same fixed paragraph every time. And it works across different AI tools, not just one.</p>
+
+<h2>Start here</h2>
+<div class="card-grid">
+  <a class="card" href="/docs/setup">
+    <h3>Setup</h3>
+    <p>Connect SubVault to Claude Desktop, Cursor, VS Code, or ChatGPT.</p>
+  </a>
+  <a class="card" href="/docs/tools">
+    <h3>Tools</h3>
+    <p>The two MCP tools your AI gets &mdash; <code>vault</code> and <code>remember</code> &mdash; and how they work.</p>
+  </a>
+  <a class="card" href="/docs/troubleshooting">
+    <h3>Troubleshooting</h3>
+    <p>Common issues with API keys, tool visibility, and connection problems.</p>
+  </a>
+</div>
+
+<h2>If you're new</h2>
+<ol class="body">
+  <li><a href="/signup">Sign up</a> for an account &mdash; free during early access.</li>
+  <li>Save the API key the signup page shows you. We don't show it again.</li>
+  <li>Follow <a href="/docs/setup">Setup</a> to connect your AI tool.</li>
+  <li>In a chat, try: <em>"Remember that my tech stack is Python and Postgres."</em> Then in a new chat: <em>"What do you know about my tech stack?"</em></li>
+</ol>
+
+<h2>Need help?</h2>
+<p>Email <a href="mailto:info@subvault.ai">info@subvault.ai</a>. Security disclosures &rarr; see our <a href="/security">security policy</a>.</p>

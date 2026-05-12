@@ -1,0 +1,108 @@
+<!-- description: Common SubVault issues and how to fix them. -->
+<h1>Troubleshooting</h1>
+<p class="lede">If SubVault isn't working the way you expected, here are the most common issues and what to try.</p>
+
+<details>
+<summary>My AI doesn't see SubVault tools at all</summary>
+<div class="body">
+<p>The most common cause: your AI tool wasn't restarted after the config was written.</p>
+<ul class="body">
+  <li><strong>Claude Desktop:</strong> Quit fully (Cmd-Q on Mac, not just close the window). Then relaunch.</li>
+  <li><strong>Cursor:</strong> Restart Cursor. Reload-window from the command palette is sometimes not enough &mdash; full quit and relaunch.</li>
+  <li><strong>VS Code:</strong> The MCP config is per-project, in <code>.vscode/mcp.json</code>. Make sure you're in the right project, then reload the window.</li>
+</ul>
+<p>If your tool was already running when the install script ran, it doesn't pick up the new config until restart.</p>
+<p>Still not seeing tools? Check that the config file actually has SubVault in it. Locations:</p>
+<ul class="body">
+  <li>Cursor: <code>~/.cursor/mcp.json</code></li>
+  <li>Claude Desktop (macOS): <code>~/Library/Application Support/Claude/claude_desktop_config.json</code></li>
+  <li>Claude Desktop (Linux): <code>~/.config/Claude/claude_desktop_config.json</code></li>
+  <li>VS Code: <code>.vscode/mcp.json</code> in your project</li>
+</ul>
+<p>You should see a <code>subvault</code> entry under <code>mcpServers</code> (or <code>servers</code> for VS Code).</p>
+</div>
+</details>
+
+<details>
+<summary>I'm getting 401 / "Invalid API key" errors</summary>
+<div class="body">
+<p>This means your API key was rejected. Three causes, in order of likelihood:</p>
+<ol class="body">
+  <li><strong>The key was regenerated.</strong> If you (or someone with access to your dashboard) clicked Regenerate, the old key was invalidated immediately. Anywhere you'd installed it needs the new key.</li>
+  <li><strong>The key has whitespace or got truncated.</strong> Re-copy it from your <a href="/dashboard">dashboard</a> using the Copy button. Manual selection sometimes grabs an extra space or misses the last character.</li>
+  <li><strong>The key isn't in the config the way the tool expects.</strong> The header line should be <code>"Authorization": "Bearer sv_live_..."</code> &mdash; the word <code>Bearer</code> with a space, then the key.</li>
+</ol>
+<p>To verify the key independently, paste this in a terminal (replace with your real key):</p>
+<pre><code>curl -X POST https://mcp.subvault.ai/mcp \
+  -H "Authorization: Bearer YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json, text/event-stream" \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}'</code></pre>
+<p>If that returns a list of tools, the key works and the issue is in your tool's config. If it returns 401, the key itself is the problem &mdash; regenerate it from your <a href="/dashboard">dashboard</a>.</p>
+</div>
+</details>
+
+<details>
+<summary>I lost my API key</summary>
+<div class="body">
+<p>The signup page shows the key once, on purpose. If you didn't save it:</p>
+<ol class="body">
+  <li>Sign in at the <a href="/dashboard">dashboard</a> with your email and password.</li>
+  <li>If you still have access via any tool that's already configured, the dashboard's Regenerate button mints a new key and invalidates the old one.</li>
+  <li>If you have <strong>no</strong> way to access the API, email <a href="mailto:info@subvault.ai">info@subvault.ai</a> from the address you signed up with. We'll regenerate the key for you.</li>
+</ol>
+</div>
+</details>
+
+<details>
+<summary>SubVault is connected, but my AI doesn't seem to use it</summary>
+<div class="body">
+<p>SubVault tools are present but your AI isn't calling them. A few causes:</p>
+<ul class="body">
+  <li><strong>Your vault might be empty.</strong> If you just signed up and haven't vaulted anything, <code>remember</code> has nothing to return. Try first: <em>"Remember that I work in Python."</em> Then in a new chat: <em>"What language do I work in?"</em></li>
+  <li><strong>The phrasing didn't trigger your AI.</strong> Direct asks work best: <em>"vault this conversation"</em>, <em>"remember what we just discussed"</em>, <em>"what do I know about X?"</em></li>
+  <li><strong>Tools toggled off.</strong> In Claude Desktop, click the tool icon in the chat input to verify SubVault tools are enabled. In Cursor, the MCP icon at the bottom shows connected servers.</li>
+</ul>
+</div>
+</details>
+
+<details>
+<summary>The install script said "no supported tools detected"</summary>
+<div class="body">
+<p>The script looks for the config directories of Claude Desktop, Cursor, and VS Code. If none are found, it prints that message.</p>
+<ul class="body">
+  <li>Make sure the tool is actually installed and has been opened at least once. The config directory is created on first launch.</li>
+  <li>If you're using a tool the script doesn't auto-detect (e.g. Zed, Continue, custom MCP clients), use the <a href="/docs/setup">Manual JSON</a> tab in setup docs.</li>
+</ul>
+</div>
+</details>
+
+<details>
+<summary>I want to delete my account and all my data</summary>
+<div class="body">
+<p>Email <a href="mailto:info@subvault.ai">info@subvault.ai</a> from the address you signed up with, subject "Delete my account."</p>
+<p>We'll delete your user record, your API keys, and your entire vault &mdash; usually within one business day. We'll confirm when it's done.</p>
+<p>This deletes everything: facts, decisions, action items, your account row, all API keys. There's no undo.</p>
+</div>
+</details>
+
+<details>
+<summary>SubVault is slow, or <code>remember</code> takes a while</summary>
+<div class="body">
+<p>Typical recall is under 500ms. If it feels slow:</p>
+<ul class="body">
+  <li>The first call after a long idle period can take a few seconds &mdash; the server warms up. Subsequent calls are fast.</li>
+  <li>Very large vaults (10K+ items) take slightly longer to assemble. This is normal.</li>
+  <li>Network latency adds tens to a hundred milliseconds depending on where you're connecting from.</li>
+</ul>
+<p>If you see consistent multi-second responses on small vaults, that's a real bug &mdash; please email <a href="mailto:info@subvault.ai">info@subvault.ai</a> with your workspace ID (visible on your <a href="/dashboard">dashboard</a>).</p>
+</div>
+</details>
+
+<details>
+<summary>Something else &mdash; or I don't know what's wrong</summary>
+<div class="body">
+<p>Email <a href="mailto:info@subvault.ai">info@subvault.ai</a> with whatever info you have. The workspace ID from your <a href="/dashboard">dashboard</a> helps us find your account quickly. Screenshots of error messages are gold.</p>
+<p>For security issues, see our <a href="/security">security policy</a>.</p>
+</div>
+</details>
