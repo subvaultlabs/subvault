@@ -5,7 +5,7 @@
 <h1 align="center">SubVault</h1>
 
 <p align="center">
-  <strong>Shared memory for your AI tools.</strong>
+  <strong>Permanent memory for your AI. Two words: remember and vault.</strong>
 </p>
 
 <p align="center">
@@ -23,7 +23,7 @@
 
 ## One memory across every AI tool
 
-SubVault is an MCP server that gives Claude, Cursor, ChatGPT, and Copilot permanent memory. Two words — `remember` and `vault` — and your AI never starts from zero.
+SubVault is an MCP server that gives Claude, Cursor, ChatGPT, and Copilot one permanent memory. Your AI never starts from zero.
 
 ## What it is
 
@@ -94,12 +94,12 @@ We ran the same query through both systems in the same Claude.ai session.
 ## Install
 
 ```sh
-curl -fsSL https://subvault.ai/setup.sh | bash -s YOUR_API_KEY
+curl -fsSL https://subvault.ai/install.sh | bash -s YOUR_API_KEY
 ```
 
 Sign up at [subvault.ai](https://subvault.ai/signup) for the API key. The installer wires up Claude Desktop, Cursor, and VS Code. Safe to re-run.
 
-Claude Desktop and ChatGPT (Pro and higher) can also connect via their Connectors UI — paste `https://mcp.subvault.ai/mcp` as a custom connector and sign in. Full setup at [subvault.ai/docs/setup](https://subvault.ai/docs/setup).
+Claude Desktop has a one-click extension: download [subvault.mcpb](https://subvault.ai/subvault.mcpb) and double-click it. Claude.ai (web) and ChatGPT (Pro and higher) connect via their Connectors UI: paste `https://mcp.subvault.ai/mcp` as a custom connector and sign in. Full setup at [subvault.ai/docs/setup](https://subvault.ai/docs/setup).
 
 ## How your AI uses it
 
@@ -107,6 +107,7 @@ Claude Desktop and ChatGPT (Pro and higher) can also connect via their Connector
 |------|--------------|
 | `subvault:vault` | Saves a fact, decision, action item, or person. |
 | `subvault:remember` | Pulls relevant records for the current conversation. |
+| `subvault:corpus_stats` | Returns counts of what is stored. Numbers only, never content. |
 
 Your AI decides when to call them. You just say *"vault this"* or ask a question that needs context.
 
