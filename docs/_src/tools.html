@@ -1,13 +1,13 @@
 <!-- description: The two MCP tools your AI gets when you connect SubVault. -->
 <h1>Tools</h1>
-<p class="lede">When you connect SubVault, your AI gets two tools: <code>vault</code> for saving knowledge, and <code>remember</code> for recalling it. You don't call them directly &mdash; your AI does, based on what you ask.</p>
+<p class="lede">When you connect SubVault, your AI gets two verbs &mdash; <code>vault</code> for saving knowledge, <code>remember</code> for recalling it &mdash; plus a small third tool, <code>corpus_stats</code>, for counts. You don't call them directly &mdash; your AI does, based on what you ask.</p>
 
 <h2>vault</h2>
 
 <div class="tool-row">
   <div class="tool-name">vault</div>
   <div class="tool-desc">
-    <strong>Save knowledge from a conversation.</strong> Your AI extracts the structured items worth keeping &mdash; facts, decisions, action items, people &mdash; and saves them to your vault. The raw chat isn't stored; just the load-bearing claims.
+    <strong>Save knowledge from a conversation.</strong> Your AI extracts the structured items worth keeping &mdash; facts, decisions, action items, people &mdash; and saves them to your vault. Your full transcript is never sent &mdash; only what your AI explicitly vaults.
     <em class="example">Try: "Vault what we just decided about the schema migration."</em>
     <em class="example">Try: "Remember that we use Postgres for our production database."</em>
   </div>
@@ -25,11 +25,21 @@
   </div>
 </div>
 
+<h2>corpus_stats</h2>
+
+<div class="tool-row">
+  <div class="tool-name">corpus_stats</div>
+  <div class="tool-desc">
+    <strong>Count what's inside.</strong> Returns totals &mdash; facts, decisions, action items, people, documents. Numbers only, never content.
+    <em class="example">Try: "How big is my vault?"</em>
+  </div>
+</div>
+
 <h2>That's it</h2>
 
-<p>Two tools, two verbs. Your AI decides which to call based on what you ask. You don't pick.</p>
+<p>Two verbs plus a stats tool. Your AI decides which to call based on what you ask. You don't pick.</p>
 
-<p>Vault stats (count of facts, decisions, action items) come back through <code>remember</code> &mdash; just ask, e.g. <em>"how big is my vault?"</em></p>
+<p>Vault stats come from <code>corpus_stats</code> &mdash; just ask, e.g. <em>"how big is my vault?"</em></p>
 
 <h2>How it flows</h2>
 
@@ -45,3 +55,4 @@
 <p>Saving works the same way: you say <em>"vault this"</em> or <em>"remember that..."</em> and your AI calls <code>vault</code> with the right content.</p>
 
 <p>To keep a topic out of recall or have an old fact dropped, email <a href="mailto:info@subvault.ai">info@subvault.ai</a>.</p>
+

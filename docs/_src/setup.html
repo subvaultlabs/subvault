@@ -1,4 +1,4 @@
-<!-- description: Connect SubVault to Claude Desktop, Cursor, VS Code, or ChatGPT.
+<!-- description: Connect SubVault to Claude Desktop, Cursor, or VS Code.
      scripts: tabs -->
 <h1>Setup</h1>
 <p class="lede">Connect SubVault to your AI tool. Pick whichever install path fits.</p>
@@ -18,7 +18,6 @@
 <div class="tabs" role="tablist">
   <button class="tab active" data-tab="script">One-line script</button>
   <button class="tab" data-tab="claude">Claude Desktop (OAuth)</button>
-  <button class="tab" data-tab="chatgpt">ChatGPT</button>
   <button class="tab" data-tab="manual">Manual JSON</button>
 </div>
 
@@ -26,7 +25,7 @@
 <h3>One-line install (Cursor, VS Code, Claude Desktop)</h3>
 <p>This script auto-configures every supported AI tool it finds on your machine. Safe to re-run.</p>
 
-<pre><code>curl -fsSL https://subvault.ai/setup.sh | bash -s YOUR_API_KEY</code></pre>
+<pre><code>curl -fsSL https://subvault.ai/install.sh | bash -s YOUR_API_KEY</code></pre>
 
 <p>Replace <code>YOUR_API_KEY</code> with the key from your signup page (it starts with <code>sv_live_</code>). The script:</p>
 <ul class="body">
@@ -46,6 +45,11 @@
 <h3>Claude Desktop &mdash; OAuth via Connectors UI</h3>
 <p>If you're on a recent Claude Desktop, the OAuth path is the cleanest install. No file editing, no API key copy-paste.</p>
 
+<h4>One-click extension</h4>
+<p>The fastest path: download <a href="https://subvault.ai/subvault.mcpb">subvault.mcpb</a> and double-click it. Claude Desktop installs SubVault as an extension and walks you through sign-in. Nothing else to configure.</p>
+
+<h4>Or connect via the Connectors UI</h4>
+
 <ol class="body">
   <li>Open Claude Desktop.</li>
   <li>Settings &rarr; Connectors &rarr; <strong>Add custom connector</strong>.</li>
@@ -57,18 +61,6 @@
 </ol>
 
 <p>Try a quick test: <em>"What do you know about me?"</em> &mdash; if SubVault is empty, your AI will say so. If it has content, it'll surface relevant items.</p>
-</div>
-
-<div class="tab-panel" id="tab-chatgpt">
-<h3>ChatGPT &mdash; custom connector</h3>
-<p>SubVault works as a custom connector in ChatGPT (Pro and higher).</p>
-<ol class="body">
-  <li>In ChatGPT, click your profile &rarr; <strong>Settings</strong> &rarr; <strong>Connectors</strong>.</li>
-  <li>Click <strong>Add custom connector</strong> and paste:
-    <pre><code>https://mcp.subvault.ai/mcp</code></pre>
-  </li>
-  <li>ChatGPT will walk you through the OAuth sign-in. Use the same email and password as your subvault.ai account.</li>
-</ol>
 </div>
 
 <div class="tab-panel" id="tab-manual">
@@ -129,3 +121,4 @@
 </ul>
 
 <p>If neither works, see <a href="/docs/troubleshooting">Troubleshooting</a>.</p>
+
