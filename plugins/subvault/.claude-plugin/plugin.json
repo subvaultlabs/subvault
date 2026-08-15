@@ -1,0 +1,13 @@
+{
+  "name": "subvault",
+  "version": "0.1.0",
+  "description": "SubVault is your personal database; every AI product is a client. Two verbs: vault saves, remember recalls. Your facts, decisions, and open tasks move with you across platforms.",
+  "author": {
+    "name": "SubVault Labs",
+    "url": "https://subvault.ai"
+  },
+  "homepage": "https://subvault.ai",
+  "repository": "https://github.com/subvaultlabs/subvault",
+  "license": "MIT",
+  "keywords": ["memory", "mcp", "knowledge", "recall", "context", "persistence"]
+}

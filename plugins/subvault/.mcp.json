@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "subvault": {
+      "type": "http",
+      "url": "https://mcp.subvault.ai/mcp"
+    }
+  }
+}
