@@ -1,6 +1,6 @@
 # SubVault for Claude
 
-SubVault is your personal database. Every AI product is a client. Your facts, decisions, and open tasks live in one vault at [subvault.ai](https://subvault.ai) and move with you: the session you close in Claude opens in any client you connect next.
+SubVault is your personal memory database. Your facts, decisions, and open tasks live in one vault at [subvault.ai](https://subvault.ai) and move with you: the session you close in Claude opens in any client you connect next.
 
 ## What this plugin installs
 

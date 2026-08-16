@@ -6,3 +6,6 @@ Initial release: hosted MCP connection, subvault skill, two commands (/vault, /r
 
 ## 0.1.1 — 2026-08-15
 - Skill aligned with the plain tool text: stale docstring-override line removed, prohibitions trimmed to observed failures.
+
+## 0.1.2 — 2026-08-15
+- Description updated to the personal memory database line, matching the directory listing.
