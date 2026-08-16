@@ -60,6 +60,10 @@ List completed work as done items. The server closes matching open tasks from do
 
 When the user says vault about one specific thing, save that thing with the matching kind: `fact` for something learned, `decision` for a choice made. One item, concrete, self-contained. Confirm exactly what you captured, item by item. Never reply only "saved".
 
+### Repeat saves
+
+You can vault more than once in a long thread. Each save keeps the work so far. A later save closes the earlier open tasks it completes.
+
 ## Prohibitions
 
 - Never call remember or vault on your own; the user's word is the trigger.
