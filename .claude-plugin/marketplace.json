@@ -12,7 +12,7 @@
   "plugins": [
     {
       "name": "subvault",
-      "description": "SubVault is your personal memory database. Two verbs: vault saves, remember recalls. Your facts, decisions, and open tasks move with you across platforms.",
+      "description": "SubVault is your personal memory database. End a session with vault; start the next with remember, and your AI picks up where you left off. Your facts, decisions, and open tasks move with you across platforms.",
       "source": "./plugins/subvault",
       "category": "productivity"
     }
