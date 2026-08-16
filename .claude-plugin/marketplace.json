@@ -13,7 +13,6 @@
     {
       "name": "subvault",
       "description": "SubVault is your personal database; every AI product is a client. Two verbs: vault saves, remember recalls. Your facts, decisions, and open tasks move with you across platforms.",
-      "version": "0.1.0",
       "source": "./plugins/subvault",
       "category": "productivity"
     }
